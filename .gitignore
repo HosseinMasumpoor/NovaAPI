@@ -1,0 +1,8 @@
+.env
+/vendor
+/storage/logs
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
