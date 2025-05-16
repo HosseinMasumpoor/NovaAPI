@@ -1,5 +1,14 @@
 <?php
 
+use JetBrains\PhpStorm\NoReturn;
+
+if (!function_exists('basePath')) {
+    function basePath(string $path = ''): string
+    {
+        return $GLOBALS['basePath'] . DIRECTORY_SEPARATOR . $path;
+    }
+}
+
 if(!function_exists("getConfigByDotNotation")){
     function getConfigByDotNotation(string $key, string $basePath){
         $parts = explode('.', $key);
@@ -32,15 +41,18 @@ if(!function_exists("app")){
 
 if(!function_exists("config")){
     function config(string $key){
-        $basePath = __DIR__ . "/../../config";
+        $basePath = basePath("config");
 
         return getConfigByDotNotation($key, $basePath) ?? $key;
     }
 }
 
 if(!function_exists("dd")){
-    function dd(...$args){
+    #[NoReturn] function dd(...$args): void
+    {
         var_dump(...$args);
         die();
     }
 }
+
+

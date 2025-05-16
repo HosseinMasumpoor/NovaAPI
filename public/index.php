@@ -4,8 +4,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 require_once __DIR__ . '/../bootstrap/app.php';
 
-$app = new App();
-$app->run();
+(new App())->run();
 
 
 

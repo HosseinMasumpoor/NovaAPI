@@ -23,6 +23,8 @@
         "symfony/cache": "^7.2",
         "paragonie/sodium_compat": "^2.1",
         "firebase/php-jwt": "^6.11",
-        "illuminate/database": "^12.12"
+        "illuminate/database": "^12.12",
+        "kavenegar/php": "^1.2",
+        "predis/predis": "^3.0"
     }
 }

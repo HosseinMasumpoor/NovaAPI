@@ -11,7 +11,11 @@ class FileDriver implements CacheDriverInterface
 
     public function __construct()
     {
-        $this->cache = new FilesystemAdapter();
+        $this->cache = new FilesystemAdapter(
+            config('cache.drivers.file.namespace'),
+            config('cache.drivers.file.lifetime'),
+            config('cache.drivers.file.path'),
+        );
     }
 
     public function put(string $key, string $value, int $ttl): bool
