@@ -4,16 +4,14 @@ namespace App\Services;
 
 
 use App\Core\Facades\CacheFacade;
-use App\Core\Facades\LogFacade;
 use App\Exceptions\AuthException;
-use App\Interfaces\SendOTPInterface;
 use App\Jobs\SendSMSNotificationJob;
 
 class OTPService
 {
 
-    const CACHE_KEY_PREFIX = 'user_mobile_';
-    const OTP_EXPIRES_IN = 60;
+    const string CACHE_KEY_PREFIX = 'user_mobile_';
+    const int OTP_EXPIRES_IN = 60;
     public  function send($mobile): array
     {
         if($this->checkIsSent($mobile)){
