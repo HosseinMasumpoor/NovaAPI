@@ -7,6 +7,8 @@ use App\Core\Queue\Interfaces\QueueRepositoryInterface;
 use App\Core\Queue\Repositories\EloquentQueueRepository;
 use App\Core\Router;
 use App\Interfaces\SendOTPInterface;
+use App\Routes\WebRoute;
+use App\Routes\APIRoute;
 use App\Services\SendOTP\AmootSendOTP;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,7 +23,6 @@ class App
         $this->setBasePath();
         $this->loadEnv();
         $this->initContainer();
-        $this->registerHelpers();
         $this->registerRoutes();
         $this->connectDatabase();
     }
@@ -64,19 +65,14 @@ class App
 
     protected function registerRoutes(): void
     {
-        require_once __DIR__ . '/../routes/web.php';
-        require_once __DIR__ . '/../routes/api.php';
+        $routes = [
+            new APIRoute($this->router),
+            new WebRoute($this->router),
+        ];
 
-        registerWebRoutes($this->router);
-        registerAPIRoutes($this->router);
-    }
-
-    protected function registerHelpers(): void
-    {
-        require_once __DIR__ . '/../app/Helpers/core.php';
-        require_once __DIR__ . '/../app/Helpers/message.php';
-        require_once __DIR__ . '/../app/Helpers/convert.php';
-        require_once __DIR__ . '/../app/Helpers/response.php';
+        foreach ($routes as $route) {
+            $route->register();
+        }
     }
 
     protected function connectDatabase(): void

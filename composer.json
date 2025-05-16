@@ -4,7 +4,13 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Helpers/core.php",
+            "app/Helpers/message.php",
+            "app/Helpers/convert.php",
+            "app/Helpers/response.php"
+        ]
     },
     "authors": [
         {
