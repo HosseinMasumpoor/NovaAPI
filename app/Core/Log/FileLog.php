@@ -5,10 +5,11 @@ namespace App\Core\Log;
 class FileLog
 {
     protected $logFile;
-    protected string $filePath = __DIR__ . '/../../../storage/logs/laravel.log';
+    protected string $filePath;
 
     public function __construct()
     {
+        $this->filePath = basePath("storage/core/logs/laravel.log");
         $this->logFile = fopen($this->filePath, "w") or die("Unable to open file!");
     }
 

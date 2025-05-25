@@ -31,6 +31,7 @@
         "firebase/php-jwt": "^6.11",
         "illuminate/database": "^12.12",
         "kavenegar/php": "^1.2",
-        "predis/predis": "^3.0"
+        "predis/predis": "^3.0",
+      "ext-http": "*"
     }
 }

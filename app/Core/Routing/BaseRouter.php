@@ -2,7 +2,6 @@
 
 namespace App\Core\Routing;
 
-use App\Core\Router;
 use App\Core\Routing\Interfaces\RouterInterface;
 
 abstract class BaseRouter implements RouterInterface

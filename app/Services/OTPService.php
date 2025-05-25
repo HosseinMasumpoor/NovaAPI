@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Core\Facades\CacheFacade;
+use App\Core\Facades\LogFacade;
 use App\Exceptions\AuthException;
 use App\Jobs\SendSMSNotificationJob;
 
@@ -19,6 +20,7 @@ class OTPService
         }
 
         $code = random_int(100000, 999999);
+        LogFacade::info("Sending OTP to mobile number $mobile : $code");
         (new SendSMSNotificationJob($mobile, $code))->dispatch();
 
         CacheFacade::put(self::CACHE_KEY_PREFIX.$mobile, $code, self::OTP_EXPIRES_IN);

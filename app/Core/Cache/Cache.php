@@ -25,8 +25,8 @@ class Cache
         return $this->driver->forget($key);
     }
 
-    public function has($key): void
+    public function has($key): bool
     {
-        $this->driver->has($key);
+        return $this->driver->has($key);
     }
 }
