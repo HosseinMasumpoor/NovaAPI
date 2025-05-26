@@ -15,7 +15,7 @@ class AuthService
         return $this->otpService->send(convertToValidMobileNumber($mobile));
     }
 
-    public function verifyOTP(string $mobile, string $otp): ?string
+    public function verifyOTP(string $mobile, string $otp): ?array
     {
         $mobile = convertToValidMobileNumber($mobile);
         $result = $this->otpService->verify($mobile, $otp);
@@ -38,5 +38,10 @@ class AuthService
     private function register(array $data): Model
     {
         return $this->userRepository->newItem($data);
+    }
+
+    public function refresh(string $refreshToken): string
+    {
+        return $this->jwtAuthService->refresh($refreshToken);
     }
 }

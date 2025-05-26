@@ -14,6 +14,7 @@ class APIRoute extends BaseRouter
         $this->router->post('api.auth.login', '/api/auth/login', [AuthController::class, 'login']);
         $this->router->post('api.auth.verify-otp', '/api/auth/verify-otp', [AuthController::class, 'verifyOTP']);
         $this->router->post('api.auth.logout', '/api/auth/logout', [AuthController::class, 'logout'], [AuthMiddleware::class]);
+        $this->router->post('api.auth.refresh', '/api/auth/refresh', [AuthController::class, 'refresh']);
         $this->router->get('api.user', '/api/user', [UserController::class, 'getUser'], [AuthMiddleware::class]);
     }
 }

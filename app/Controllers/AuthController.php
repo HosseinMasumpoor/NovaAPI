@@ -29,18 +29,20 @@ class AuthController
         $mobile = $request->request->get('mobile');
         $code = $request->request->get('code');
 
-        $token = $this->service->verifyOTP($mobile, $code);
-        if($token){
+        $result = $this->service->verifyOTP($mobile, $code);
+        if($result){
             return new JsonResponse([
                 'success' => true,
-                'token' => $token,
+                'access_token' => $result['accessToken'],
+                'refresh_token' => $result['refreshToken'],
                 'message' => trans('auth.login.success')
             ]);
         }
 
         return new JsonResponse([
             'success' => false,
-            'token' => null,
+            'access_token' => null,
+            'refresh_token' => null,
             'message' => trans('auth.login.error')
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
@@ -60,8 +62,27 @@ class AuthController
 
         return new JsonResponse([
             'success' => false,
-            'token' => null,
+            'data' => [],
             'message' => trans('auth.logout.error')
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    public function refresh(Request $request): JsonResponse
+    {
+        $refreshToken = $request->get('refresh_token');
+        $token = $this->service->refresh($refreshToken);
+        if($token){
+            return new JsonResponse([
+                'success' => true,
+                'access_token' => $token,
+                'message' => trans('auth.login.success')
+            ]);
+        }
+        return new JsonResponse([
+            'success' => false,
+            'access_token' => null,
+            'message' => trans('auth.logout.error')
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+
     }
 }
