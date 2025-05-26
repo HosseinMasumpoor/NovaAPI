@@ -9,13 +9,17 @@ use Kavenegar\KavenegarApi;
 
 class KavenegarSendOTP implements SendOTPInterface
 {
-    const string TOKEN = "584A68615A412F49795437754E67344A6B74435A50686F70374D2F56397A686E6A704E69673653427537343D";
+    private string $token;
+    public function __construct()
+    {
+        $this->token = config('kavenegar.api_token');
+    }
 
     public function send(string $mobile, string $code)
     {
          try {
 
-             $api = new \Kavenegar\KavenegarApi(self::TOKEN);
+             $api = new \Kavenegar\KavenegarApi($this->token);
              $receptor = $mobile;
              $token = $code;
              $token2 = "";

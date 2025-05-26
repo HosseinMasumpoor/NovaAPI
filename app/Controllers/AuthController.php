@@ -6,7 +6,6 @@ use App\Services\AuthService;
 use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class AuthController
 {
@@ -30,21 +29,16 @@ class AuthController
         $code = $request->request->get('code');
 
         $result = $this->service->verifyOTP($mobile, $code);
+        $data = [
+            'access_token' => $result['accessToken'],
+            'refresh_token' => $result['refreshToken'],
+        ];
+
         if($result){
-            return new JsonResponse([
-                'success' => true,
-                'access_token' => $result['accessToken'],
-                'refresh_token' => $result['refreshToken'],
-                'message' => trans('auth.login.success')
-            ]);
+            return successResponse($data, trans('auth.login.success'));
         }
 
-        return new JsonResponse([
-            'success' => false,
-            'access_token' => null,
-            'refresh_token' => null,
-            'message' => trans('auth.login.error')
-        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        return failedResponse(trans('auth.login.error'));
     }
 
     public function logout(Request $request): JsonResponse
@@ -53,36 +47,24 @@ class AuthController
 
         $result = $this->service->logout($token);
         if($result){
-            return new JsonResponse([
-                'success' => true,
-                'data' => [],
-                'message' => trans('auth.logout.success')
-            ]);
+            return successResponse([], trans('auth.logout.success'));
         }
 
-        return new JsonResponse([
-            'success' => false,
-            'data' => [],
-            'message' => trans('auth.logout.error')
-        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        return failedResponse(trans('auth.logout.error'));
     }
 
     public function refresh(Request $request): JsonResponse
     {
         $refreshToken = $request->get('refresh_token');
         $token = $this->service->refresh($refreshToken);
+        $data = [
+            'access_token' => $token,
+        ];
+
         if($token){
-            return new JsonResponse([
-                'success' => true,
-                'access_token' => $token,
-                'message' => trans('auth.login.success')
-            ]);
+            return successResponse($data, trans('auth.refresh.success'));
         }
-        return new JsonResponse([
-            'success' => false,
-            'access_token' => null,
-            'message' => trans('auth.logout.error')
-        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        return failedResponse(trans('auth.refresh.error'));
 
     }
 }

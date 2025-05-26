@@ -110,4 +110,11 @@ if(!function_exists("toDateTime")){
     }
 }
 
+if (!function_exists('env')) {
+    function env(string $name): mixed
+    {
+        return $_ENV[$name] ?? null;
+    }
+}
+
 
