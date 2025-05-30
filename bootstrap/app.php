@@ -10,6 +10,7 @@ use App\Core\Routing\Router;
 use App\Interfaces\SendOTPInterface;
 use App\Providers\AppServiceProvider;
 use App\Providers\AuthServiceProvider;
+use App\Providers\StorageServiceProvider;
 use App\Routes\APIRoute;
 use App\Routes\WebRoute;
 use App\Services\SendOTP\AmootSendOTP;
@@ -29,7 +30,6 @@ class App
         $this->initContainer();
         $this->setServiceProviders();
         $this->registerRoutes();
-        $this->initAuthSystem();
         $this->connectDatabase();
     }
 
@@ -95,6 +95,7 @@ class App
         $this->providers = [
             AppServiceProvider::class,
             AuthServiceProvider::class,
+            StorageServiceProvider::class,
         ];
 
         $this->registerProviders();
@@ -115,10 +116,5 @@ class App
             $provider = $this->container->make($provider);
             $provider->boot();
         }
-    }
-
-    private function initAuthSystem()
-    {
-//        $GLOBALS["auth"] = $this->container->make(AuthManager::class);
     }
 }

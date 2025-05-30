@@ -3,7 +3,9 @@
 use App\Core\Auth\AuthManager;
 use App\Core\Auth\Interfaces\GuardInterface;
 use App\Core\Facades\ConfigFacade;
+use App\Core\Facades\StorageFacade;
 use JetBrains\PhpStorm\NoReturn;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 if (!function_exists('basePath')) {
     function basePath(string $path = ''): string
@@ -111,9 +113,25 @@ if(!function_exists("toDateTime")){
 }
 
 if (!function_exists('env')) {
-    function env(string $name): mixed
+    function env(string $name, string $defaultValue = null): mixed
     {
-        return $_ENV[$name] ?? null;
+        return $_ENV[$name] ?? $defaultValue;
+    }
+}
+
+if(!function_exists("storage")){
+    function storage(string $disk = null): mixed
+    {
+        return StorageFacade::disk($disk);
+    }
+}
+
+if(!function_exists("hashFileName")){
+    function hashFileName(UploadedFile $file, string $algo = 'md5'): string
+    {
+        $fileName = hash($algo, $file->getClientOriginalName());
+        $extension = $file->getClientOriginalExtension();
+        return  $fileName . '.' . $extension;
     }
 }
 

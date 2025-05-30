@@ -1,6 +1,7 @@
 .env
 /vendor
 /storage/core/*
+/storage/private/*
 /storage/logs
 /.fleet
 /.idea
