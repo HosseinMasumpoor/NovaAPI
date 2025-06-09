@@ -32,6 +32,10 @@
         "illuminate/database": "^12.12",
         "kavenegar/php": "^1.2",
         "predis/predis": "^3.0",
-        "aws/aws-sdk-php": "^3.343"
+        "aws/aws-sdk-php": "^3.343",
+        "rakit/validation": "^1.4",
+        "illuminate/validation": "^12.16",
+        "illuminate/translation": "^12.16",
+        "respect/validation": "^2.4"
     }
 }

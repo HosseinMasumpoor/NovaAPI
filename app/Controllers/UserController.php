@@ -2,8 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Core\Validation\ValidatorManager;
 use App\Services\UserService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+
 
 class UserController
 {
@@ -24,8 +27,25 @@ class UserController
 
     public function updateProfile(Request $request){
         $user = auth()->user();
-
         $data = array_merge($request->request->all(), $request->files->all());
+
+        $rules = [
+            'mobile' => 'required|string'
+        ];
+
+        $messages = [
+            'mobile.required' => 'Mobile is required'
+        ];
+
+
+
+        $validator = app()->make(ValidatorManager::class);
+        $result = $validator->driver('illuminate')->validate($data, $rules, $messages);
+
+        if($result->failed()){
+            return new JsonResponse($result->errors(), 401);
+        }
+
 
         $result = $this->service->updateProfile($user["id"], $data);
         if($result){
@@ -33,4 +53,5 @@ class UserController
         }
         return failedResponse("");
     }
+
 }
