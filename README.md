@@ -1,7 +1,8 @@
 # NovaAPI
 
-**NovaAPI** is a lightweight and powerful mini-framework for building APIs in PHP.  
-Inspired by modern architectures and leveraging tools like Symfony and Eloquent, it provides a solid foundation for fast API development.
+**NovaAPI** is a modern and scalable PHP framework designed specifically for building high-performance APIs.
+
+Built on proven tools like Symfony Routing and Eloquent ORM, it offers a clean architecture, powerful features, and a lightweight core — giving developers everything they need to build fast, flexible, and maintainable API services.
 
 ---
 
