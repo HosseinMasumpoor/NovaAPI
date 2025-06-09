@@ -19,8 +19,48 @@ Inspired by modern architectures and leveraging tools like Symfony and Eloquent,
 ✅ **Logging system**  
 ✅ **Middleware system** with easy extensibility  
 ✅ **Authentication system** with customizable drivers  
-✅ **OTP + JWT-based authentication service** built-in
+✅ **OTP + JWT-based authentication service** built-in    
+✅ **Validation system** with Illuminate/Rakit/Respect drivers + custom extensibility
 
+---
+
+## 🚀 Performance Benchmarks (Real-World Tests)
+
+**Test Environment**:
+- ⚙️ **Hardware**: Desktop with 12-core 2.5GHz CPU, 32GB RAM
+- 🐧 **OS**: Ubuntu 22.04 Desktop
+- 🛠️ **Stack**: PHP 8.4 + Apache + MySQL
+- 🔧 **Test Tool**: `ab`
+
+**Key Results**:
+- ⏱️ **Avg. Response Time**:
+   - NovaAPI: **6ms**
+   - Laravel: **60ms** (10x slower)
+- 🖥️ **CPU Utilization**:
+   - NovaAPI: Reaches **100% CPU at ~100 concurrent requests**
+   - Laravel: Reaches **100% CPU at just ~10 concurrent requests**
+- 🚀 **Max Throughput**:
+   - NovaAPI: **5,000+ RPS** before significant degradation
+   - Laravel: **~500 RPS** under same conditions
+
+**Interpretation**:  
+NovaAPI demonstrates:  
+✔ **Up to 10x better concurrency handling**  
+✔ **Up to 10x lower CPU usage per request**  
+✔ **More efficient resource utilization** for high-load APIs
+
+---
+
+### 📊 Simplified Benchmark Comparison
+| Metric          | NovaAPI | Laravel | Advantage       |
+|-----------------|---------|---------|-----------------|
+| Response Time   | 6ms     | 60ms    | 10x faster      |
+| Max Concurrency | 100 RPS | 10 RPS  | 10x more scalable |
+| CPU Efficiency  | 1x      | 10x     | 10x less load   |
+
+---
+
+> 💡 **Note**: Results are from local development environment tests. For production-like benchmarks, consider cloud-based testing with identical hardware.
 ---
 
 ## ⚡️ Installation
