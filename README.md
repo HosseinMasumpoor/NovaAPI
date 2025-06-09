@@ -39,9 +39,6 @@ Inspired by modern architectures and leveraging tools like Symfony and Eloquent,
 - 🖥️ **CPU Utilization**:
    - NovaAPI: Reaches **100% CPU at ~100 concurrent requests**
    - Laravel: Reaches **100% CPU at just ~10 concurrent requests**
-- 🚀 **Max Throughput**:
-   - NovaAPI: **5,000+ RPS** before significant degradation
-   - Laravel: **~500 RPS** under same conditions
 
 **Interpretation**:  
 NovaAPI demonstrates:  
